@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="row">
+        <div class="offset-4 col-4" style="margin-top: 20%">
+            <h4 class="text-center">Ejercicio Calculadora Toptive</h4>
+            <hr>
+            <div class="row">
+                <div class="offset-3 col-7">
+                    <fieldset class="scheduler-border ml-1">
+                        <div class="mb-2 mt-2 ml-1">
+                            <input [(ngModel)]="sesion" class="form-control text-right" type="text" style="width: 10.5rem;" name="sesion">
+                            <input [(ngModel)]="oculto" class="form-control text-right" type="text" style="width: 10.5rem;" name="oculto" hidden>
+                        </div>
+                        <div class="ml-1">
+                            <button (click)="abrir()" class="btn btn-info mr-2" data-toggle="modal" data-target="#sesionModal"><i class="fas fa-folder-open"></i></button>
+                            <button (click)="guardar()" class="btn btn-info mr-2"><i class="fas fa-save"></i></button>
+                            <button (click)="borrar()" class="btn btn-danger" style="width: 4.3rem;"><i class="fas fa-backspace"></i></button>
+                        </div>
+                        <div class="mt-2 ml-1">
+                            <button (click)="click('7')" class="btn btn-light mr-2">7</button>
+                            <button (click)="click('8')" class="btn btn-light mr-2">8</button>
+                            <button (click)="click('9')" class="btn btn-light mr-2">9</button>
+                            <button (click)="clickOpe('-')" class="btn btn-primary"><i class="fas fa-minus"></i></button>
+                        </div>
+                        <div class="mt-2 ml-1">
+                            <button (click)="click('4')" class="btn btn-light mr-2">4</button>
+                            <button (click)="click('5')" class="btn btn-light mr-2">5</button>
+                            <button (click)="click('6')" class="btn btn-light mr-2">6</button>
+                            <button (click)="clickOpe('suma')" class="btn btn-primary"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="mt-2 ml-1">
+                            <button (click)="click('1')" class="btn btn-light mr-2">1</button>
+                            <button (click)="click('2')" class="btn btn-light mr-2">2</button>
+                            <button (click)="click('3')" class="btn btn-light mr-2">3</button>
+                            <button (click)="clickOpe('/')" class="btn btn-primary"><i class="fas fa-divide"></i></button>
+                        </div>
+                        <div class="mt-2 mb-1 ml-1">
+                            <button (click)="click('0')" class="btn btn-light mr-2">0</button>
+                            <button (click)="calcular()" class="btn btn-success mr-2" style="width: 4.9rem;"><i class="fas fa-equals"></i></button>
+                            <button (click)="clickOpe('*')" class="btn btn-primary"><i class="fas fa-times" style="margin: 1px"></i></button>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="sesionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header btn-info">
+                <h4 class="modal-title" id="exampleModalLabel">Historial</h4>
+                <h4 data-dismiss="modal" #closebutton class="cursor"><i class="far fa-times-circle"></i></h4>
+            </div>
+            <div class="modal-body">
+                <div name="alerta" *ngIf="sesiones.length == 0">
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fas fa-exclamation-circle"></i> El historial está vacio.
+                    </div>
+                </div>
+                <table *ngIf="sesiones.length > 0" class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Calculo</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let sesion of sesiones">
+                            <th scope="row">{{ sesion.id }}</th>
+                            <td>{{ sesion.calculo }}</td>
+                            <td class="text-right"><button class="btn btn-sm btn-success" (click)="seleccionar(sesion.calculo)">seleccionar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
